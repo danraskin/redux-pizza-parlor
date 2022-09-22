@@ -5,7 +5,7 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 
 // COMPONENT IMPORTS
 import Header from '../Header/Header';
-// import Checkout from '../Checkout/Checkout';
+import Checkout from '../Checkout/Checkout';
 // import Menu from '../Menu/Menu';
 // import OrderForm from '../OrderForm/OrderForm';
 // import PizzaItem from '../PizzaItem/PizzaItem';
@@ -22,18 +22,18 @@ function App() {
       <Router>
         <Header />
         <Route exact path="/">
-          // Menu and Pizza Items
+          {/* Menu and Pizza Items */}
           <img src='images/pizza_photo.png' />
           <p>Pizza is great.</p>
         </Route>
         <Route exact path="/order">
-          // order form will live here
+          {/* order form will live here */}
         </Route>
         <Route exact path="/checkout">
-          // checkout componenets
+          <Checkout />
         </Route>
         <Route exact path="/admin">
-          // admin page components
+          {/* admin page components */}
         </Route>
 
 
