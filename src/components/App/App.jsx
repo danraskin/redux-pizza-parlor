@@ -46,13 +46,13 @@ function App() {
           <p>Pizza is great.</p>
         </Route>
         <Route exact path="/order">
-          {/* order form will live here */}
+          {/* // order form will live here */}
         </Route>
         <Route exact path="/checkout">
-          <Checkout />
+          {/* // checkout componenets */}
         </Route>
         <Route exact path="/admin">
-          {/* admin page components */}
+          {/* // admin page components */}
         </Route>
 
 

@@ -18,8 +18,6 @@ const cart = (state = [], action) => {
     // dealing with number and id's of pizzas
     // action type to add 
     // action type to remove
-
-
     return state;
 }
 
@@ -46,6 +44,7 @@ const orderDetails = (state = [], action) => {
 
 const storeInstance = createStore(
     combineReducers({
+        pizzas,
         cart,
         orderDetails
     }),
