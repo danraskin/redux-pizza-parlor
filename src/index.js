@@ -15,9 +15,6 @@ const pizzas = (state = [], action) => {
 }
 
 const cart = (state = [], action) => {
-    // dealing with number and id's of pizzas
-    // action type to add 
-    // action type to remove
     if (action.type === 'ADD_TO_CART') {
         return [...state, action.payload];
     }
@@ -27,7 +24,9 @@ const cart = (state = [], action) => {
         let a = state.slice(0, action.payload);
         let b = state.slice(action.payload + 1);
         return a.concat(b);
-
+    }
+    if (action.type === 'CLEAR_CART') {
+        return [];
     }
     return state;
 }
@@ -38,6 +37,9 @@ const orderDetails = (state = [], action) => {
     console.log('Customer Info:', action.payload);
     if (action.type === 'ADD_CLIENT_INFO') {
         return [...state, action.payload]
+    } 
+    if (action.type === 'CLEAR_ORDER') {
+        return [];
     }
     return state;
 }
