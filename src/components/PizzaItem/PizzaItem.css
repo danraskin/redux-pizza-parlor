@@ -1,0 +1,9 @@
+.pizzaItem {
+    display: inline;
+    margin: 25px;
+}
+
+.pizzaPhoto {
+
+    max-width: 250px;
+}

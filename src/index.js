@@ -18,6 +18,15 @@ const cart = (state = [], action) => {
     // dealing with number and id's of pizzas
     // action type to add 
     // action type to remove
+    if (action.type === 'ADD_TO_CART') {
+        return [...state, action.payload];
+    }
+    // if (action.type === 'REMOVE_FROM_CART') {
+    //     let beforeSlice = state.slice(0, action.index);
+    //     let afterSlice = state.slice(action.index + 1);
+
+    //     return beforeSlice.concat(afterSlice);
+    // }
     return state;
 }
 
