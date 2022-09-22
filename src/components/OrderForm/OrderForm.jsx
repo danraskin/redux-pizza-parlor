@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {useDispatch } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 function OrderForm() {
@@ -12,6 +12,7 @@ function OrderForm() {
     const [type, setType] = useState('');
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -30,6 +31,11 @@ function OrderForm() {
         setCity('');
         setZip('');
         setType('');
+        handleClick();
+    }
+
+    const handleClick = () => {
+        history.push('/checkout');
     }
 
     return(
@@ -63,7 +69,6 @@ function OrderForm() {
                 value={zip}
                 onChange={(event) => setZip(event.target.value)}
             />
-
             <input 
                 type="radio" 
                 name="type"
@@ -78,12 +83,7 @@ function OrderForm() {
                 onChange={(event) => setType(event.target.value)}
             />
             <label>Delivery</label><br/>  
-            
-            <button type="submit">
-                <Link to="/checkout" className={location.pathname === '/checkout' ? 'active' : ''}>
-                    Next
-                </Link>
-            </button>
+            <button type="submit">Next</button>
         </form>
     )
 }
