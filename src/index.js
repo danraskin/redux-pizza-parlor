@@ -7,6 +7,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 
 // PIZZA REDUCER
+const pizzas = (state = [], action) => {
+    if (action.type === 'GET_PIZZAS') {
+        return action.payload;
+    }
+    return state;
+}
+
 const cart = (state = [], action) => {
     // dealing with number and id's of pizzas
     // action type to add 

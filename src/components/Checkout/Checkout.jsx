@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux';
 function Checkout() {
 
     const order  = useSelector(store=>store.orderDetails) //takes in fully formed data object.
+    const cart = useSelector(store=>store.cart); //table maps pizzas in 'cart'.
+
+
 
     const postOrder = (event) => {
         event.preventDefault();
@@ -24,6 +27,7 @@ function Checkout() {
             <p>{order.customer_name}</p>
             <p>{order.street_address}</p>
             <p>{order.city}, {order.zip}</p>
+            <p>{order.type}</p>
             <table id="orderReview">
                 <thead>
                     <tr>
@@ -32,17 +36,17 @@ function Checkout() {
                     </tr>
                 </thead>
                 <tbody>
-                    {order.pizzas.map(pizza=> {
+                    {cart.map((pizza, i)=> {
                         return (
-                            <tr>
-                                <td>pizzaid: {pizza.id}</td>
-                                <td>pizzaquant: {pizza.quantity}</td>
+                            <tr key={i}>
+                                <td>{pizza.name}</td>
+                                <td>{pizza.price}</td>
                             </tr>
                         )
                     })}
                 </tbody>
             </table>
-            <h3>Total price: </h3>
+            <h3>Total: {order.total}</h3>
             <form onSubmit={(event) => postOrder(event)}>
                 <button type='submit'>Submit</button>
             </form>
