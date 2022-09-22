@@ -33,7 +33,6 @@ const cart = (state = [], action) => {
 // ORDER DETAILS
 const orderDetails = (state = [], action) => {
     // action type to add customer info
-    console.log('Customer Info:', action.payload);
     if (action.type === 'ADD_CLIENT_INFO') {
         return [...state, action.payload]
     } 
