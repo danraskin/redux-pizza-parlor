@@ -2,6 +2,12 @@ import React from 'react'
 import './PizzaItem.css';
 import { useDispatch } from 'react-redux'
 import { useState, setState } from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 
 function PizzaItem({ pizza }) {
@@ -32,22 +38,41 @@ function PizzaItem({ pizza }) {
     }
 
     return (
-        <div className="pizzaitem">
-            <img src={pizza.image_path} className="pizzaPhoto" />
-            <section className="pizzadetails">
-                {pizza.name}
-                {pizza.price}
-                <div>
-                    {cartStatus ?
-                        <button onClick={addToCart}>Add to Order</button>
-                        :
-                        <button onClick={removeFromCart}>Remove</button>
-                    }
-                </div>
-            </section>
-        </div>
+        <Card sx={{ maxWidth: 550 }}>
+            <CardMedia
+                component="img"
+                height="200"
+                image={pizza.image_path}
+            />
+            <CardContent>
+                <Typography variant='h4'>{pizza.name}</Typography>
+                <Typography variant='h5' color="secondary">${pizza.price}</Typography>
+                <Typography variant='body2' textAlign="center">{pizza.description}</Typography>
+
+            </CardContent>
+            <CardActions>
+                {cartStatus ?
+                    <Button onClick={addToCart} variant='contained'>Add to Order</Button>
+                    :
+                    <Button onClick={removeFromCart} variant='contained' color='error'>Remove</Button>
+                }
+            </CardActions>
+
+        </Card>
 
     )
 };
 
 export default PizzaItem;
+
+
+{/* <Card>
+    <CardContent>
+        <Typography>
+
+        </Typography>
+    </CardContent>
+    <CardActions>
+
+    </CardActions>
+</Card> */}

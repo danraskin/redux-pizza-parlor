@@ -19,11 +19,18 @@ const cart = (state = [], action) => {
         return [...state, action.payload];
     }
     if (action.type === 'REMOVE_FROM_CART') {
-        console.log(action.payload);
-        console.log(state);
-        let a = state.slice(0, action.payload);
-        let b = state.slice(action.payload + 1);
-        return a.concat(b);
+        console.log('item to remove is:', action.payload);
+        let removeID = action.payload;
+        console.log('AP is:', action.payload);
+        // FIND IN ARRAY: state @ i .id? 
+        console.log('State is:', state);
+        let results = state.filter(pizza => (pizza.id === Number(removeID)));
+        console.log('Filter Results:', results);
+        let index = state.indexOf(results[0]);
+        if (index > -1) {
+            results.splice(index, 1);
+        } return results;
+
     }
     if (action.type === 'CLEAR_CART') {
         return [];
@@ -37,7 +44,7 @@ const orderDetails = (state = [], action) => {
     console.log('Customer Info:', action.payload);
     if (action.type === 'ADD_CLIENT_INFO') {
         return [...state, action.payload]
-    } 
+    }
     if (action.type === 'CLEAR_ORDER') {
         return [];
     }
