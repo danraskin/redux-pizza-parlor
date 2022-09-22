@@ -25,7 +25,7 @@ function PizzaItem({ pizza, accrueTotal, reduceTotal }) {
     const addToCart = () => {
         const action = {
             type: 'ADD_TO_CART',
-            payload: { pizza },
+            payload: pizza,
         }
         console.log(pizza)
         dispatch(action);

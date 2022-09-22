@@ -19,17 +19,18 @@ const cart = (state = [], action) => {
         return [...state, action.payload];
     }
     if (action.type === 'REMOVE_FROM_CART') {
-        console.log(action.payload);
-        console.log(state);
-        let a = state.slice(0, action.payload);
-        let b = state.slice(action.payload + 1);
-        return a.concat(b);
+        let newState = state.filter(pizza=> (pizza.id !== action.payload));
+        return newState;
     }
     if (action.type === 'CLEAR_CART') {
         return [];
     }
     return state;
 }
+
+
+ // sets index of the artist to delete
+
 
 // ORDER DETAILS
 const orderDetails = (state = {}, action) => {
