@@ -19,10 +19,11 @@ const cart = (state = [], action) => {
         return [...state, action.payload];
     }
     if (action.type === 'REMOVE_FROM_CART') {
-        let beforeSlice = state.slice(0, action.index);
-        let afterSlice = state.slice(action.index + 1);
-
-        return beforeSlice.concat(afterSlice);
+        console.log(action.payload);
+        console.log(state);
+        let a = state.slice(0, action.payload);
+        let b = state.slice(action.payload + 1);
+        return a.concat(b);
     }
     if (action.type === 'CLEAR_CART') {
         return [];
@@ -33,6 +34,7 @@ const cart = (state = [], action) => {
 // ORDER DETAILS
 const orderDetails = (state = [], action) => {
     // action type to add customer info
+    console.log('Customer Info:', action.payload);
     if (action.type === 'ADD_CLIENT_INFO') {
         return [...state, action.payload]
     } 
