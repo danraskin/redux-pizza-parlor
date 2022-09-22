@@ -67,19 +67,23 @@ function OrderForm() {
             <input 
                 type="radio" 
                 name="type"
-                value={type}
-                onChange={(event) => setType(event.target.value = 'pickup')}
+                value="pickup"
+                onChange={(event) => setType(event.target.value)}
             />
             <label>Pickup</label><br/>
             <input 
                 type="radio" 
                 name="type" 
-                value={type}
-                onChange={(event) => setType(event.target.value = 'delivery')}
+                value="delivery"
+                onChange={(event) => setType(event.target.value)}
             />
             <label>Delivery</label><br/>  
             
-            <button type="submit">Next</button>
+            <button type="submit">
+                <Link to="/checkout" className={location.pathname === '/checkout' ? 'active' : ''}>
+                    Next
+                </Link>
+            </button>
         </form>
     )
 }
