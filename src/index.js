@@ -14,7 +14,6 @@ const pizzas = (state = [], action) => {
     return state;
 }
 
-// CART REDUCER
 const cart = (state = [], action) => {
     // dealing with number and id's of pizzas
     // action type to add 
@@ -34,8 +33,10 @@ const cart = (state = [], action) => {
 // ORDER DETAILS
 const orderDetails = (state = [], action) => {
     // action type to add customer info
-
-
+    console.log('Customer Info:', action.payload);
+    if(action.type === 'ADD_CLIENT_INFO') {
+        return [...state, action.payload]
+    }
     return state;
 }
 

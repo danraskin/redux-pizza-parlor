@@ -7,10 +7,10 @@ import { useDispatch } from 'react-redux';
 
 // COMPONENT IMPORTS
 import Header from '../Header/Header';
-// import Checkout from '../Checkout/Checkout';
+import Checkout from '../Checkout/Checkout';
 import Menu from '../Menu/Menu';
-// import OrderForm from '../OrderForm/OrderForm';
-// import PizzaItem from '../PizzaItem/PizzaItem';
+import OrderForm from '../OrderForm/OrderForm';
+
 
 
 
