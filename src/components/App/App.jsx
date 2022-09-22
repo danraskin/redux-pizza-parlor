@@ -47,13 +47,10 @@ function App() {
           <OrderForm />
         </Route>
         <Route exact path="/checkout">
-          {/* // checkout componenets */}
+          <Checkout />
         </Route>
         <Route exact path="/admin">
-          {/* // admin page components */}
         </Route>
-
-
       </Router>
 
     </div>

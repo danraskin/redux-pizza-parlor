@@ -15,27 +15,29 @@ const pizzas = (state = [], action) => {
 }
 
 const cart = (state = [], action) => {
-    // dealing with number and id's of pizzas
-    // action type to add 
-    // action type to remove
     if (action.type === 'ADD_TO_CART') {
         return [...state, action.payload];
     }
-    // if (action.type === 'REMOVE_FROM_CART') {
-    //     let beforeSlice = state.slice(0, action.index);
-    //     let afterSlice = state.slice(action.index + 1);
+    if (action.type === 'REMOVE_FROM_CART') {
+        let beforeSlice = state.slice(0, action.index);
+        let afterSlice = state.slice(action.index + 1);
 
-    //     return beforeSlice.concat(afterSlice);
-    // }
+        return beforeSlice.concat(afterSlice);
+    }
+    if (action.type === 'CLEAR_CART') {
+        return [];
+    }
     return state;
 }
 
 // ORDER DETAILS
 const orderDetails = (state = [], action) => {
     // action type to add customer info
-    console.log('Customer Info:', action.payload);
-    if(action.type === 'ADD_CLIENT_INFO') {
+    if (action.type === 'ADD_CLIENT_INFO') {
         return [...state, action.payload]
+    } 
+    if (action.type === 'CLEAR_ORDER') {
+        return [];
     }
     return state;
 }
