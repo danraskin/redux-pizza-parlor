@@ -15,10 +15,21 @@ function OrderForm() {
 
     const handleSubmit = event => {
         event.preventDefault();
+        console.log('Customer Name:', customer_name);
+        console.log('Customer Address:', street_address);
+        console.log('City:', city);
+        console.log('Zip:', zip);
+        console.log('Type:', type);
         const action = {
             type: 'ADD_CLIENT_INFO',
-            payload: {customer_name, street_address, city, zip, type:aklsdfhglas}
-        }
+            payload: {customer_name, street_address, city, zip, type}
+        };
+        dispatch(action);
+        setName('');
+        setAddress('');
+        setCity('');
+        setZip('');
+        setType('');
     }
 
     return(
@@ -53,10 +64,20 @@ function OrderForm() {
                 onChange={(event) => setZip(event.target.value)}
             />
 
-            <input type="radio" id="Pickup" name="type" value={pickup}/>
-            <label htmlFor="Pickup">Pickup</label><br/>
-            <input type="radio" id="Delivery" name="type" value={delivery}/>
-            <label htmlFor="Delivery">Delivery</label><br/>  
+            <input 
+                type="radio" 
+                name="type"
+                value={type}
+                onChange={(event) => setType(event.target.value = 'pickup')}
+            />
+            <label>Pickup</label><br/>
+            <input 
+                type="radio" 
+                name="type" 
+                value={type}
+                onChange={(event) => setType(event.target.value = 'delivery')}
+            />
+            <label>Delivery</label><br/>  
             
             <button type="submit">Next</button>
         </form>
