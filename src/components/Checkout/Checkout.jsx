@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function Checkout() {
-    dispatch = useDispatch();
+    const dispatch = useDispatch();
     const order  = useSelector(store=>store.orderDetails) //takes in fully formed data object.
     const cart = useSelector(store=>store.cart); //table maps pizzas in 'cart'.
     console.log (order);
@@ -26,6 +27,7 @@ function Checkout() {
         })
     }
 //to do: utilize MUI 'spanning table'
+//set button to LINK to "/"
     return (
         <>
             <h2>Step 3: Checkout</h2>
@@ -53,7 +55,7 @@ function Checkout() {
             </table>
             <h3>Total: {order.total}</h3>
             <form onSubmit={(event) => postOrder(event)}>
-                <button type='submit'>Submit</button>
+                <button type='submit'>SUBMIT</button>
             </form>
         </>
     );
