@@ -44,7 +44,7 @@ function App() {
           <Menu />
         </Route>
         <Route exact path="/order">
-          {/* // order form will live here */}
+          <OrderForm />
         </Route>
         <Route exact path="/checkout">
           {/* // checkout componenets */}
