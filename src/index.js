@@ -35,6 +35,9 @@ const cart = (state = [], action) => {
 const orderDetails = (state = [], action) => {
     // action type to add customer info
     console.log('Customer Info:', action.payload);
+    //action.type === 'CREATE_ORDER'
+    // action.payload is local state TOTAL from MENU; 
+    // takes info in CART and 
     if (action.type === 'ADD_CLIENT_INFO') {
         return [...state, action.payload]
     } 
@@ -43,6 +46,9 @@ const orderDetails = (state = [], action) => {
     }
     return state;
 }
+
+
+
 
 const storeInstance = createStore(
     combineReducers({

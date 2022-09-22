@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useState, setState } from 'react';
 
 
-function PizzaItem({ pizza }) {
+function PizzaItem({ pizza, accrueTotal, reduceTotal }) {
     let [cartStatus, setCartStatus] = useState(true);
 
     const dispatch = useDispatch();
@@ -18,6 +18,7 @@ function PizzaItem({ pizza }) {
         console.log(pizza)
         dispatch(action);
         setCartStatus(true);
+        reduceTotal(pizza.price);
 
     }
 
@@ -29,6 +30,7 @@ function PizzaItem({ pizza }) {
         console.log(pizza)
         dispatch(action);
         setCartStatus(false);
+        accrueTotal(pizza.price);
     }
 
     return (

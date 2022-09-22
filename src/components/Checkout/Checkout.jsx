@@ -1,14 +1,18 @@
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function Checkout() {
+    const history = useHistory();
     const dispatch = useDispatch();
-    const order  = useSelector(store=>store.orderDetails) //takes in fully formed data object.
+    const order  = useSelector(store=>store.orderDetails[0]) //takes in fully formed data object.
     const cart = useSelector(store=>store.cart); //table maps pizzas in 'cart'.
     console.log (order);
     console.log(cart);
 
+    const handleClick = () => {
+        history.push('/');
+    }
 
     const postOrder = (event) => {
         event.preventDefault();
@@ -22,6 +26,7 @@ function Checkout() {
             dispatch(actionCart);
             const actionOrder = { type: 'CLEAR_ORDER' };
             dispatch(actionOrder);
+            handleClick();
         }).catch((error) => {
             console.log('error in postOrder: ',error);
         })
@@ -38,14 +43,14 @@ function Checkout() {
             <table id="orderReview">
                 <thead>
                     <tr>
-                        <td>Pizza</td>
-                        <td>Cost</td>
+                        <th>Pizza</th>
+                        <th>Cost</th>
                     </tr>
                 </thead>
                 <tbody>
                     {cart.map((pizza, i)=> {
                         return (
-                            <tr key={i}>
+                            <tr>
                                 <td>{pizza.name}</td>
                                 <td>{pizza.price}</td>
                             </tr>
