@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import Header from '../Header/Header';
 import Checkout from '../Checkout/Checkout';
 // import Menu from '../Menu/Menu';
-// import OrderForm from '../OrderForm/OrderForm';
+import OrderForm from '../OrderForm/OrderForm';
 // import PizzaItem from '../PizzaItem/PizzaItem';
 
 
@@ -46,7 +46,7 @@ function App() {
           <p>Pizza is great.</p>
         </Route>
         <Route exact path="/order">
-          {/* // order form will live here */}
+          <OrderForm />
         </Route>
         <Route exact path="/checkout">
           {/* // checkout componenets */}

@@ -24,22 +24,11 @@ const cart = (state = [], action) => {
 // ORDER DETAILS
 const orderDetails = (state = [], action) => {
     // action type to add customer info
-
-    return {
-        customer_name: "Donatello",
-        street_address: "20 W 34th St",
-        city: "New York",
-        zip: "10001",
-        total: "27.98",
-        type: "Pickup",
-        pizzas: [{
-          id: "1",
-          quantity: "1"
-        },{
-          id: "2",
-          quantity: "1"
-        }]
-      };
+    console.log('Customer Info:', action.payload);
+    if(action.type === 'ADD_CLIENT_INFO') {
+        return [...state, action.payload]
+    }
+    return state;
 }
 
 const storeInstance = createStore(
