@@ -32,14 +32,19 @@ const cart = (state = [], action) => {
 }
 
 // ORDER DETAILS
-const orderDetails = (state = [], action) => {
+const orderDetails = (state = {}, action) => {
     // action type to add customer info
     console.log('Customer Info:', action.payload);
-    //action.type === 'CREATE_ORDER'
+    if (action.type === 'CREATE_ORDER') { //need to *initialize* an order object.
+        console.log(action.payload);
+        const total=action.payload;
+        return {...state, total}; 
+    }
     // action.payload is local state TOTAL from MENU; 
     // takes info in CART and 
     if (action.type === 'ADD_CLIENT_INFO') {
-        return [...state, action.payload]
+        const customerInfo = action.payload;
+        return {...state, customerInfo}
     } 
     if (action.type === 'CLEAR_ORDER') {
         return [];

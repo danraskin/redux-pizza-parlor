@@ -1,10 +1,15 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PizzaItem from '../PizzaItem/PizzaItem';
 import './Menu.css'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
+
 function Menu() {
+    const dispatch = useDispatch();
+    const menu = useSelector(store => store.pizzas);
+
+    const orderDetails = useSelector(store=> store.orderDetails);
 
     const [ totalCost, setTotalCost ] = useState(0);
 
@@ -14,11 +19,13 @@ function Menu() {
     const reduceTotal = (price) => {
         setTotalCost(Number(totalCost) - Number(price));
     }
-    console.log(totalCost);
 
-    
+    const handleClick = () => {
+        const action = { type: 'CREATE_ORDER', payload: totalCost };
+        dispatch(action);
+        console.log(orderDetails);
+    }
 
-    const menu = useSelector(store => store.pizzas);
     return (
         <div>
             <div >
@@ -26,10 +33,10 @@ function Menu() {
                     return <PizzaItem key={i} pizza={pizza} reduceTotal={reduceTotal} accrueTotal={accrueTotal} className="pizzaitem" />
                 })}
             </div>
-            <button onClick={handleClick}>
-                <Link to="/order">
+            <button onClick={handleClick}>CONTINUE
+                {/* <Link to="/order">
                     Continue to Order
-                </Link>
+                </Link> */}
             </button>
         </div>
     )
