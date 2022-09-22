@@ -19,6 +19,9 @@ const cart = (state = [], action) => {
     // dealing with number and id's of pizzas
     // action type to add 
     // action type to remove
+    if (action.type === 'ADD_TO_CART') {
+        return [...state, action.payload];
+    }
     return state;
 }
 
