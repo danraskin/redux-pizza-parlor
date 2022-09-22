@@ -34,7 +34,7 @@ function App() {
         </Route>
         <Route exact path="/admin">
           // admin page components
-        </Route>
+i        </Route>
 
 
       </Router>
