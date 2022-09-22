@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Checkout() {
-
+    dispatch = useDispatch();
     const order  = useSelector(store=>store.orderDetails) //takes in fully formed data object.
     const cart = useSelector(store=>store.cart); //table maps pizzas in 'cart'.
-console.log (order);
-console.log(cart);
+    console.log (order);
+    console.log(cart);
 
 
     const postOrder = (event) => {
@@ -17,6 +17,10 @@ console.log(cart);
             data: order
         }).then((response)=> {
             console.log(response);
+            const actionCart = { type: 'CLEAR_CART' };
+            dispatch(actionCart);
+            const actionOrder = { type: 'CLEAR_ORDER' };
+            dispatch(actionOrder);
         }).catch((error) => {
             console.log('error in postOrder: ',error);
         })
