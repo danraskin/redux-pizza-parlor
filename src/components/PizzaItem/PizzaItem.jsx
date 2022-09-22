@@ -13,7 +13,7 @@ function PizzaItem({ pizza }) {
     const removeFromCart = () => {
         const action = {
             type: 'REMOVE_FROM_CART',
-            payload: { pizza },
+            payload: pizza.id,
         }
         console.log(pizza)
         dispatch(action);
