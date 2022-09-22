@@ -14,7 +14,6 @@ const pizzas = (state = [], action) => {
     return state;
 }
 
-// CART REDUCER
 const cart = (state = [], action) => {
     // dealing with number and id's of pizzas
     // action type to add 
@@ -26,8 +25,21 @@ const cart = (state = [], action) => {
 const orderDetails = (state = [], action) => {
     // action type to add customer info
 
-
-    return state;
+    return {
+        customer_name: "Donatello",
+        street_address: "20 W 34th St",
+        city: "New York",
+        zip: "10001",
+        total: "27.98",
+        type: "Pickup",
+        pizzas: [{
+          id: "1",
+          quantity: "1"
+        },{
+          id: "2",
+          quantity: "1"
+        }]
+      };
 }
 
 const storeInstance = createStore(
