@@ -10,9 +10,12 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 function Header() {
-    const order = useSelector(store => store.orderDetails)
 
-
+    const totalCost  = useSelector(store=>store.totalCost)
+    return (
+        <header className='App-header'>
+            <h1 className='App-title'>Prime Pizza</h1>
+            <p>Total: ${totalCost}</p>
     return (
         <header>
             <AppBar position="fixed" color='secondary'>
@@ -21,9 +24,9 @@ function Header() {
                     {/* <h1 className='App-title' >Prime Pizza</h1> */}
                     <Typography variant='h5' id="ordertotal" edge="end">
                         {/* <ShoppingCartIcon /> */}
-                        Total: ${order.total}
+                        Total: ${totalCost}
                     </Typography>
-                    {/* <h2 alignContent="end">Total: ${order.total}</h2> */}
+                    {/* <h2 alignContent="end">Total: ${totalCost}</h2> */}
                 </Toolbar>
             </AppBar>
         </header>

@@ -14,23 +14,49 @@ function Checkout() {
         history.push('/');
     }
 
+    //properly formatted order object. needs info in 'order', pizza, and TOTAL.
+
+    const orderObject = order;
+
+    const makeOrderObject = () => {
+        const pizzasToOrder = [];
+        let totalPrice = 0;        
+        cart.map(pizzaInCart=> {
+            let pizza = {
+                id: pizzaInCart.id,
+                quantity: 1
+            }
+            
+            totalPrice += Number(pizzaInCart.price) ;
+            pizzasToOrder.push(pizza);
+        })
+
+        orderObject.pizzas = pizzasToOrder;
+        orderObject.total = totalPrice;
+    }
+
     const postOrder = (event) => {
         event.preventDefault();
+        makeOrderObject();
+        console.log(orderObject);
         axios({
             method: 'POST',
             url: '/api/order',
-            data: order
+            data: orderObject
         }).then((response)=> {
-            console.log(response);
-            const actionCart = { type: 'CLEAR_CART' };
-            dispatch(actionCart);
-            const actionOrder = { type: 'CLEAR_ORDER' };
-            dispatch(actionOrder);
             handleClick();
+            const actionCart = { type: 'CLEAR_CART' };
+                dispatch(actionCart);
+            const actionOrder = { type: 'CLEAR_ORDER' };
+                dispatch(actionOrder);
+            const actionTotal = { type: 'CLEAR_TOTAL' };
+                dispatch(actionTotal)
         }).catch((error) => {
             console.log('error in postOrder: ',error);
         })
     }
+
+
 //to do: utilize MUI 'spanning table'
 //set button to LINK to "/"
     return (
@@ -50,7 +76,7 @@ function Checkout() {
                 <tbody>
                     {cart.map((pizza, i)=> {
                         return (
-                            <tr>
+                            <tr key={i}>
                                 <td>{pizza.name}</td>
                                 <td>{pizza.price}</td>
                             </tr>
