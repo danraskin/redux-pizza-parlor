@@ -2,19 +2,32 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+//table formatting
+// import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button';
+
+
 function Checkout() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const order  = useSelector(store=>store.orderDetails[0]) //takes in fully formed data object.
+    const order  = useSelector(store=>store.orderDetails[0]) //takes in partially formed data object.
     const cart = useSelector(store=>store.cart); //table maps pizzas in 'cart'.
+    const totalCost  = useSelector(store=>store.totalCost) //display total
 
     console.log (order);
     console.log(cart);
 
-    const handleClick = () => {
+    const handleClick = () => { //pushes user back to home at checkout
         history.push('/');
     }
 
+//formats data object. pizza quantity is hard-coded, per given project parameters.
     const makeOrderObject = () => {
         let pizzasToOrder = [];
         let totalPrice = 0;        
@@ -23,7 +36,7 @@ function Checkout() {
                 id: pizzaInCart.id,
                 quantity: 1
             }
-            totalPrice += Number(pizzaInCart.price) ;
+            totalPrice += Number(pizzaInCart.price);
             pizzasToOrder.push(pizza);
         })
 
@@ -40,8 +53,8 @@ function Checkout() {
             url: '/api/order',
             data: order
         }).then((response)=> {
-            handleClick();
-            const actionCart = { type: 'CLEAR_CART' };
+            handleClick(); //moves to home page
+            const actionCart = { type: 'CLEAR_CART' }; //clears all data.
                 dispatch(actionCart);
             const actionOrder = { type: 'CLEAR_ORDER' };
                 dispatch(actionOrder);
@@ -52,8 +65,8 @@ function Checkout() {
         })
     }
 
-
 //to do: utilize MUI 'spanning table'
+//checkout render BREAKS if order information is incomplete. only matters for re-load/troubleshooting.
     return (
         <>
             <h2>Step 3: Checkout</h2>
@@ -61,28 +74,36 @@ function Checkout() {
             <p>{order.street_address}</p>
             <p>{order.city}, {order.zip}</p>
             <p>{order.type}</p>
-            <table id="orderReview">
-                <thead>
-                    <tr>
-                        <th>Pizza</th>
-                        <th>Cost</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left">
+                      Pizza
+                    </TableCell>
+                    <TableCell align="right">Cost</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
                     {cart.map((pizza, i)=> {
-                        return (
-                            <tr key={i}>
-                                <td>{pizza.name}</td>
-                                <td>{pizza.price}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
-            <h3>Total: {order.total}</h3>
-            <form onSubmit={(event) => postOrder(event)}>
-                <button type='submit'>SUBMIT</button>
-            </form>
+                            return (
+                                <TableRow key={i}>
+                                    <TableCell aligh="left">{pizza.name}</TableCell>
+                                    <TableCell align="right">${pizza.price}</TableCell>
+                                </TableRow>
+                            )
+                        })}
+                    <TableRow align="left">
+                      <TableCell ></TableCell>
+                      <TableCell align="right">Total: ${totalCost}</TableCell>
+                    </TableRow>
+                    <TableRow align="right">
+                      <TableCell align="left"></TableCell>
+                      <TableCell align="right"><Button onClick={(event) => postOrder(event)}>SUBMIT</Button></TableCell>
+                    </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
         </>
     );
 }
