@@ -8,20 +8,21 @@ import Button from '@mui/material/Button';
 
 
 
-function Menu() {
+function Menu( {totalCost, accrueTotal, reduceTotal}) {
     const dispatch = useDispatch();
     const menu = useSelector(store => store.pizzas);
 
     const orderDetails = useSelector(store=> store.orderDetails);
 
-    const [ totalCost, setTotalCost ] = useState(0);
+    //  MOVING BELOW UP TO APP - Need to pass back totalCost, accrueTotal and reduceTotal
+    // const [ totalCost, setTotalCost ] = useState(0);
 
-    const accrueTotal = (price) => {
-        setTotalCost(Number(totalCost) + Number(price));
-    }
-    const reduceTotal = (price) => {
-        setTotalCost(Number(totalCost) - Number(price));
-    }
+    // const accrueTotal = (price) => {
+    //     setTotalCost(Number(totalCost) + Number(price));
+    // }
+    // const reduceTotal = (price) => {
+    //     setTotalCost(Number(totalCost) - Number(price));
+    // }
 
     const handleClick = () => {
         const action = { type: 'CREATE_ORDER', payload: totalCost };
@@ -35,7 +36,7 @@ function Menu() {
                 {menu.map((pizza, i) => {
                     return (
                         <Grid item key={i} xs={12} md={7} lg={4}>
-                            <PizzaItem key={i} pizza={pizza} reduceTotal={reduceTotal} accrueTotal={accrueTotal} className="pizzaitem" />
+                            <PizzaItem key={i} pizza={pizza} accrueTotal={accrueTotal} reduceTotal={reduceTotal} className="pizzaitem" />
                         </Grid>
                     )
                 })}
