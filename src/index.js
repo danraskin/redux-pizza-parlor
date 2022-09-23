@@ -21,6 +21,7 @@ const cart = (state = [], action) => {
     if (action.type === 'REMOVE_FROM_CART') {
         let newState = state.filter(pizza=> (pizza.id !== action.payload));
         return newState;
+
     }
     if (action.type === 'CLEAR_CART') {
         return [];
@@ -47,14 +48,12 @@ const orderDetails = (state = {}, action) => {
         const customerInfo = action.payload;
         return {...state, customerInfo}
     } 
+
     if (action.type === 'CLEAR_ORDER') {
         return [];
     }
     return state;
 }
-
-
-
 
 const storeInstance = createStore(
     combineReducers({

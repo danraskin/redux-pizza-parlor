@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import {useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Button from '@mui/material/Button';
 
 function OrderForm() {
 
@@ -39,52 +47,72 @@ function OrderForm() {
     }
 
     return(
-        <form onSubmit={handleSubmit} className="Customer Info">
-            <h2>Step 2: Customer Information</h2>
-            <input
-                required
-                type="text"
-                placeholder="Name"
-                value={customer_name}
-                onChange={(event) => setName(event.target.value)}
-            />
-            <input
-                required
-                type="text"
-                placeholder="Street Address"
-                value={street_address}
-                onChange={(event) => setAddress(event.target.value)}
-            />
-            <input
-                required
-                type="text"
-                placeholder="City"
-                value={city}
-                onChange={(event) => setCity(event.target.value)}
-            />
-            <input
-                required
-                type="number"
-                placeholder="Zip"
-                value={zip}
-                onChange={(event) => setZip(event.target.value)}
-            />
-            <input 
-                type="radio" 
-                name="type"
-                value="pickup"
-                onChange={(event) => setType(event.target.value)}
-            />
-            <label>Pickup</label><br/>
-            <input 
-                type="radio" 
-                name="type" 
-                value="delivery"
-                onChange={(event) => setType(event.target.value)}
-            />
-            <label>Delivery</label><br/>  
-            <button type="submit">Next</button>
-        </form>
+        <Container maxWidth="sm">
+            <form onSubmit={handleSubmit} className="Customer Info">
+                <h2>Step 2: Customer Information</h2>
+                <Paper elevation='6'>
+                    <TextField
+                        required
+                        id="outlined-basic" 
+                        variant="outlined"
+                        type="text"
+                        label="Name"
+                        value={customer_name}
+                        onChange={(event) => setName(event.target.value)}
+                    />
+                    <TextField
+                        required
+                        id="outlined-basic" 
+                        variant="outlined"
+                        type="text"
+                        label="Street Address"
+                        value={street_address}
+                        onChange={(event) => setAddress(event.target.value)}
+                    />
+                    <TextField
+                        required
+                        id="outlined-basic" 
+                        variant="outlined"
+                        type="text"
+                        label="City"
+                        value={city}
+                        onChange={(event) => setCity(event.target.value)}
+                    />
+                    <TextField
+                        required
+                        id="outlined-basic" 
+                        variant="outlined"
+                        type="number"
+                        label="Zip"
+                        value={zip}
+                        onChange={(event) => setZip(event.target.value)}
+                    />
+
+                    <FormControl>
+                        <FormLabel id="demo-radio-buttons-group-label">Type</FormLabel>
+                        <RadioGroup
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            defaultValue=""
+                            name="radio-buttons-group"
+                        >
+                            <FormControlLabel 
+                                value="delivery" 
+                                control={<Radio />} 
+                                label="Delivery"
+                                onChange={(event) => setType(event.target.value)} 
+                            />
+                            <FormControlLabel 
+                                value="pickup" 
+                                control={<Radio />} 
+                                label="Pickup"
+                                onChange={(event) => setType(event.target.value)}
+                            />
+                        </RadioGroup>
+                    </FormControl>
+                <Button type="submit" variant="outlined">Next</Button>
+                </Paper>
+            </form>
+        </Container>
     )
 }
 

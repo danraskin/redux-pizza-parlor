@@ -3,6 +3,9 @@ import PizzaItem from '../PizzaItem/PizzaItem';
 import './Menu.css'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import Grid from '@mui/material/Grid'; // Grid version 1
+import Button from '@mui/material/Button';
+
 
 
 function Menu() {
@@ -27,18 +30,25 @@ function Menu() {
     }
 
     return (
-        <div>
-            <div >
+        <section>
+            <Grid container spacing={4} sx={{ mx: "auto" }}>
                 {menu.map((pizza, i) => {
-                    return <PizzaItem key={i} pizza={pizza} reduceTotal={reduceTotal} accrueTotal={accrueTotal} className="pizzaitem" />
+                    return (
+                        <Grid item key={i} xs={12} md={7} lg={4}>
+                            <PizzaItem key={i} pizza={pizza} reduceTotal={reduceTotal} accrueTotal={accrueTotal} className="pizzaitem" />
+                        </Grid>
+                    )
                 })}
+            </Grid>
+            <div >
+
             </div>
-            <button onClick={handleClick}>CONTINUE
-                {/* <Link to="/order">
+            <Button onClick={handleClick} variant='contained'>
+                <Link to="/order">
                     Continue to Order
-                </Link> */}
-            </button>
-        </div>
+                </Link>
+            </Button>
+        </section>
     )
 };
 
