@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-function PizzaItem({ pizza }) {
+function PizzaItem({ pizza, accrueTotal, reduceTotal }) {
     let [cartStatus, setCartStatus] = useState(true);
 
     const dispatch = useDispatch();
@@ -24,17 +24,19 @@ function PizzaItem({ pizza }) {
         console.log(pizza)
         dispatch(action);
         setCartStatus(true);
+        reduceTotal(pizza.price);
 
     }
 
     const addToCart = () => {
         const action = {
             type: 'ADD_TO_CART',
-            payload: { pizza },
+            payload: pizza,
         }
         console.log(pizza)
         dispatch(action);
         setCartStatus(false);
+        accrueTotal(pizza.price);
     }
 
     return (

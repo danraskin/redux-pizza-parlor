@@ -19,17 +19,8 @@ const cart = (state = [], action) => {
         return [...state, action.payload];
     }
     if (action.type === 'REMOVE_FROM_CART') {
-        console.log('item to remove is:', action.payload);
-        let removeID = action.payload;
-        console.log('AP is:', action.payload);
-        // FIND IN ARRAY: state @ i .id? 
-        console.log('State is:', state);
-        let results = state.filter(pizza => (pizza.id === Number(removeID)));
-        console.log('Filter Results:', results);
-        let index = state.indexOf(results[0]);
-        if (index > -1) {
-            results.splice(index, 1);
-        } return results;
+        let newState = state.filter(pizza=> (pizza.id !== action.payload));
+        return newState;
 
     }
     if (action.type === 'CLEAR_CART') {
@@ -38,13 +29,26 @@ const cart = (state = [], action) => {
     return state;
 }
 
+
+ // sets index of the artist to delete
+
+
 // ORDER DETAILS
-const orderDetails = (state = [], action) => {
+const orderDetails = (state = {}, action) => {
     // action type to add customer info
     console.log('Customer Info:', action.payload);
-    if (action.type === 'ADD_CLIENT_INFO') {
-        return [...state, action.payload]
+    if (action.type === 'CREATE_ORDER') { //need to *initialize* an order object.
+        console.log(action.payload);
+        const total=action.payload;
+        return {...state, total}; 
     }
+    // action.payload is local state TOTAL from MENU; 
+    // takes info in CART and 
+    if (action.type === 'ADD_CLIENT_INFO') {
+        const customerInfo = action.payload;
+        return {...state, customerInfo}
+    } 
+
     if (action.type === 'CLEAR_ORDER') {
         return [];
     }
