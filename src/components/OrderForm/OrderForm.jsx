@@ -79,8 +79,8 @@ function OrderForm() {
                             <FormControl>
                                 <FormLabel id="demo-row-radio-buttons-group-label">Type</FormLabel>
                                 <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
-                                    <FormControlLabel value="delivery" control={<Radio required/>} label="Delivery" onChange={(event) => setType(event.target.value)} />
-                                    <FormControlLabel value="pickup" control={<Radio />} label="Pickup" onChange={(event) => setType(event.target.value)}/>
+                                    <FormControlLabel value="delivery" checked={type === 'delivery'} control={<Radio required/>} label="Delivery" onChange={(event) => setType(event.target.value)} />
+                                    <FormControlLabel value="pickup" checked={type === 'pickup'} control={<Radio />} label="Pickup" onChange={(event) => setType(event.target.value)}/>
                                 </RadioGroup>
                             </FormControl>
                         </Grid>
