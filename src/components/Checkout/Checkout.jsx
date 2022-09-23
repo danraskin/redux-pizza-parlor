@@ -46,9 +46,11 @@ function Checkout() {
         }).then((response)=> {
             handleClick();
             const actionCart = { type: 'CLEAR_CART' };
-            dispatch(actionCart);
+                dispatch(actionCart);
             const actionOrder = { type: 'CLEAR_ORDER' };
-            dispatch(actionOrder);
+                dispatch(actionOrder);
+            const actionTotal = { type: 'CLEAR_TOTAL' };
+                dispatch(actionTotal)
         }).catch((error) => {
             console.log('error in postOrder: ',error);
         })

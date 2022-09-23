@@ -29,8 +29,19 @@ const cart = (state = [], action) => {
     return state;
 }
 
-
- // sets index of the artist to delete
+const totalCost = (state = 0, action) => {
+    if (action.type === 'ACCRUE_TOTAL') {
+        return state + Number(action.payload);
+    }
+    if (action.type === 'REDUCE_TOTAL') {
+        return state - Number(action.payload);
+    }
+    if (action.type === 'CLEAR_TOTAL') {
+        return 0;
+    }
+    return state;
+    
+}
 
 
 // ORDER DETAILS
@@ -50,7 +61,8 @@ const storeInstance = createStore(
     combineReducers({
         pizzas,
         cart,
-        orderDetails
+        orderDetails,
+        totalCost
     }),
     applyMiddleware(logger)
 );
