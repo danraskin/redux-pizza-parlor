@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import { HashRouter as Router, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 // COMPONENT IMPORTS
@@ -37,12 +37,23 @@ function App() {
       })
   }
 
+    const [ totalCost, setTotalCost ] = useState(0);
+
+    const accrueTotal = (price) => {
+        setTotalCost(Number(totalCost) + Number(price));
+    }
+    const reduceTotal = (price) => {
+        setTotalCost(Number(totalCost) - Number(price));
+    }
+
   return (
     <div className='App'>
       <Router>
-        <Header />
+        {/* <Header /> */}
+        <Header totalCost={totalCost}/>
         <Route exact path="/">
-          <Menu />
+          {/* <Menu /> */}
+          <Menu totalCost={totalCost} accrueTotal={accrueTotal} reduceTotal={reduceTotal}/>
         </Route>
         <Route exact path="/order">
           <OrderForm />
