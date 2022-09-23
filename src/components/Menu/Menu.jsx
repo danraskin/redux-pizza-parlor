@@ -23,12 +23,6 @@ function Menu() {
         setTotalCost(Number(totalCost) - Number(price));
     }
 
-    const handleClick = () => {
-        const action = { type: 'CREATE_ORDER', payload: totalCost };
-        dispatch(action);
-        console.log(orderDetails);
-    }
-
     return (
         <section>
             <Grid container spacing={4} sx={{ mx: "auto" }}>
@@ -43,7 +37,7 @@ function Menu() {
             <div >
 
             </div>
-            <Button onClick={handleClick} variant='contained'>
+            <Button variant='contained'>
                 <Link to="/order">
                     Continue to Order
                 </Link>
