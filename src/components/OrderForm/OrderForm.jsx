@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import {useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -17,7 +18,7 @@ function OrderForm() {
     const [street_address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
-    const [type, setType] = useState('');
+    const [type, setType] = useState(false);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -42,77 +43,58 @@ function OrderForm() {
         handleClick();
     }
 
+    const clearForm = () => {
+        setName('');
+        setAddress('');
+        setCity('');
+        setZip('');
+        setType('');
+    }
+
     const handleClick = () => {
         history.push('/checkout');
     }
 
     return(
-        <Container maxWidth="sm">
-            <form onSubmit={handleSubmit} className="Customer Info">
-                <h2>Step 2: Customer Information</h2>
-                <Paper elevation='6'>
-                    <TextField
-                        required
-                        id="outlined-basic" 
-                        variant="outlined"
-                        type="text"
-                        label="Name"
-                        value={customer_name}
-                        onChange={(event) => setName(event.target.value)}
-                    />
-                    <TextField
-                        required
-                        id="outlined-basic" 
-                        variant="outlined"
-                        type="text"
-                        label="Street Address"
-                        value={street_address}
-                        onChange={(event) => setAddress(event.target.value)}
-                    />
-                    <TextField
-                        required
-                        id="outlined-basic" 
-                        variant="outlined"
-                        type="text"
-                        label="City"
-                        value={city}
-                        onChange={(event) => setCity(event.target.value)}
-                    />
-                    <TextField
-                        required
-                        id="outlined-basic" 
-                        variant="outlined"
-                        type="number"
-                        label="Zip"
-                        value={zip}
-                        onChange={(event) => setZip(event.target.value)}
-                    />
-
-                    <FormControl>
-                        <FormLabel id="demo-radio-buttons-group-label">Type</FormLabel>
-                        <RadioGroup
-                            aria-labelledby="demo-radio-buttons-group-label"
-                            defaultValue=""
-                            name="radio-buttons-group"
-                        >
-                            <FormControlLabel 
-                                value="delivery" 
-                                control={<Radio />} 
-                                label="Delivery"
-                                onChange={(event) => setType(event.target.value)} 
-                            />
-                            <FormControlLabel 
-                                value="pickup" 
-                                control={<Radio />} 
-                                label="Pickup"
-                                onChange={(event) => setType(event.target.value)}
-                            />
-                        </RadioGroup>
-                    </FormControl>
-                <Button type="submit" variant="outlined">Next</Button>
-                </Paper>
-            </form>
-        </Container>
+        <Card style={{maxWidth:700, margin:"0 auto", padding:"20px 5px"}}>
+            <CardContent>
+                <h1>Step 2: Customer Information</h1>
+                <form onSubmit={handleSubmit} className="Customer Info">
+                    <Grid container spacing={2}>
+                        <Grid xs={12} item>
+                            <TextField required id="outlined-basic" variant="outlined" type="text" label="Name" placeholder="Enter Name" value={customer_name} onChange={(event) => setName(event.target.value)} fullWidth/>
+                        </Grid>
+                        <Grid xs={12} item>
+                            <TextField required id="outlined-basic" variant="outlined" type="text" label="Street Address" placeholder="Enter Street Address" value={street_address} onChange={(event) => setAddress(event.target.value)} fullWidth/>
+                        </Grid>
+                        <Grid xs={12} sm={4} item>
+                            <TextField required id="outlined-basic" variant="outlined" type="text" label="City" placeholder="Enter City" value={city} onChange={(event) => setCity(event.target.value)} fullWidth/>
+                        </Grid>
+                        <Grid xs={12} sm={4} item>
+                            <TextField required id="outlined-basic" variant="outlined" type="number" label="Zipcode" placeholder="Enter Zipcode" value={zip} onChange={(event) => setZip(event.target.value)} fullWidth/>
+                        </Grid>
+                        <Grid xs={12} sm={4} item>
+                            <FormControl>
+                                <FormLabel id="demo-row-radio-buttons-group-label">Type</FormLabel>
+                                <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
+                                    <FormControlLabel value="delivery" control={<Radio required/>} label="Delivery" onChange={(event) => setType(event.target.value)} />
+                                    <FormControlLabel value="pickup" control={<Radio />} label="Pickup" onChange={(event) => setType(event.target.value)}/>
+                                </RadioGroup>
+                            </FormControl>
+                        </Grid>
+                        <Grid xs={12} sm={4} item>
+                        <Button type="submit" variant="contained" fullWidth>Next</Button>
+                        </Grid>
+                        <Grid xs={12} sm={4} item>
+                        <Button onClick={clearForm} variant="outlined" fullWidth>Clear Form</Button>
+                        </Grid>
+                        <Grid xs={12} sm={4} item>
+                        <Button variant="contained" color="error" disabled fullWidth>Change Order</Button>
+                        </Grid>
+                    </Grid>
+                </form>
+            </CardContent>
+        </Card>
     )
 }
 
