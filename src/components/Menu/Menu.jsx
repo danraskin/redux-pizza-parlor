@@ -2,11 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import PizzaItem from '../PizzaItem/PizzaItem';
 import './Menu.css'
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import Grid from '@mui/material/Grid'; // Grid version 1
 import Button from '@mui/material/Button';
-
-
 
 function Menu( {totalCost, accrueTotal, reduceTotal}) {
     const dispatch = useDispatch();
@@ -44,7 +41,7 @@ function Menu( {totalCost, accrueTotal, reduceTotal}) {
             <div >
 
             </div>
-            <Button onClick={handleClick} variant='contained'>
+            <Button variant='contained'>
                 <Link to="/order">
                     Continue to Order
                 </Link>

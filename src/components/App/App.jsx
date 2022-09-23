@@ -10,6 +10,7 @@ import Header from '../Header/Header';
 import Checkout from '../Checkout/Checkout';
 import Menu from '../Menu/Menu';
 import OrderForm from '../OrderForm/OrderForm';
+import Admin from '../Admin/Admin';
 
 
 
@@ -61,6 +62,7 @@ function App() {
           <Checkout />
         </Route>
         <Route exact path="/admin">
+          <Admin />
         </Route>
       </Router>
 

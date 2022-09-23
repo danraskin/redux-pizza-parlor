@@ -19,7 +19,7 @@ const cart = (state = [], action) => {
         return [...state, action.payload];
     }
     if (action.type === 'REMOVE_FROM_CART') {
-        let newState = state.filter(pizza=> (pizza.id !== action.payload));
+        let newState = state.filter(pizza => (pizza.id !== action.payload));
         return newState;
 
     }
@@ -29,28 +29,38 @@ const cart = (state = [], action) => {
     return state;
 }
 
-
- // sets index of the artist to delete
-
+const totalCost = (state = 0, action) => {
+    if (action.type === 'ACCRUE_TOTAL') {
+        return state + Number(action.payload);
+    }
+    if (action.type === 'REDUCE_TOTAL') {
+        return state - Number(action.payload);
+    }
+    if (action.type === 'CLEAR_TOTAL') {
+        return 0;
+    }
+    return state;
+    
+}
 
 // ORDER DETAILS
-const orderDetails = (state = {}, action) => {
-    // action type to add customer info
-    console.log('Customer Info:', action.payload);
-    if (action.type === 'CREATE_ORDER') { //need to *initialize* an order object.
-        console.log(action.payload);
-        const total=action.payload;
-        return {...state, total}; 
-    }
-    // action.payload is local state TOTAL from MENU; 
-    // takes info in CART and 
+const orderDetails = (state = [], action) => {
     if (action.type === 'ADD_CLIENT_INFO') {
         const customerInfo = action.payload;
-        return {...state, customerInfo}
+        return [ customerInfo ];
     } 
-
     if (action.type === 'CLEAR_ORDER') {
         return [];
+    }
+    return state;
+}
+
+// ORDERS FOR ADMIN
+
+const adminOrders = (state = [], action) => {
+    console.log('Admin Info:', action.payload);
+    if (action.type === 'GET_ADMIN_ORDERS') {
+        return [...state]
     }
     return state;
 }
@@ -59,7 +69,9 @@ const storeInstance = createStore(
     combineReducers({
         pizzas,
         cart,
-        orderDetails
+        orderDetails,
+        totalCost,
+        adminOrders,
     }),
     applyMiddleware(logger)
 );
