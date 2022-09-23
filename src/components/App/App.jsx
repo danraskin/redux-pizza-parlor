@@ -59,7 +59,7 @@ function App() {
           <OrderForm />
         </Route>
         <Route exact path="/checkout">
-          <Checkout />
+          <Checkout totalCost={totalCost} setTotalCost={setTotalCost}/>
         </Route>
         <Route exact path="/admin">
           <Admin />

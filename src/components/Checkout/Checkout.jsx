@@ -13,12 +13,11 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 
 
-function Checkout() {
+function Checkout({totalCost, setTotalCost}) {
     const history = useHistory();
     const dispatch = useDispatch();
     const order  = useSelector(store=>store.orderDetails[0]) //takes in partially formed data object.
     const cart = useSelector(store=>store.cart); //table maps pizzas in 'cart'.
-    const totalCost  = useSelector(store=>store.totalCost) //display total
 
     console.log (order);
     console.log(cart);
@@ -58,8 +57,7 @@ function Checkout() {
                 dispatch(actionCart);
             const actionOrder = { type: 'CLEAR_ORDER' };
                 dispatch(actionOrder);
-            const actionTotal = { type: 'CLEAR_TOTAL' };
-                dispatch(actionTotal)
+            setTotalCost(0);
         }).catch((error) => {
             console.log('error in postOrder: ',error);
         })

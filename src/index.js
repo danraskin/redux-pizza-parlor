@@ -29,19 +29,18 @@ const cart = (state = [], action) => {
     return state;
 }
 
-const totalCost = (state = 0, action) => {
-    if (action.type === 'ACCRUE_TOTAL') {
-        return state + Number(action.payload);
-    }
-    if (action.type === 'REDUCE_TOTAL') {
-        return state - Number(action.payload);
-    }
-    if (action.type === 'CLEAR_TOTAL') {
-        return 0;
-    }
-    return state;
-
-}
+// const totalCost = (state = 0, action) => {
+//     if (action.type === 'ACCRUE_TOTAL') {
+//         return state + Number(action.payload);
+//     }
+//     if (action.type === 'REDUCE_TOTAL') {
+//         return state - Number(action.payload);
+//     }
+//     if (action.type === 'CLEAR_TOTAL') {
+//         return 0;
+//     }
+//     return state;
+// }
 
 // ORDER DETAILS
 const orderDetails = (state = [], action) => {
@@ -70,7 +69,7 @@ const storeInstance = createStore(
         pizzas,
         cart,
         orderDetails,
-        totalCost,
+        //totalCost,
         adminOrders,
     }),
     applyMiddleware(logger)
