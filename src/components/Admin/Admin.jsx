@@ -24,6 +24,7 @@ function Admin() {
 
     const dispatch = useDispatch();
     const orders = useSelector(store => store.adminOrders);
+
     // grab data from the server for the orders 
     const refreshOrders = () => {
         axios({
@@ -37,6 +38,7 @@ function Admin() {
                     payload: response.data
                 }
                 dispatch(action);
+
             })
             .catch((error) => {
                 console.log('Error in GET', error);
@@ -55,13 +57,13 @@ function Admin() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {orders.map((order) => {
+                        {orders.map((order, i) => {
                             return (
-                                <TableRow key={order.id}>
-                                    <TableCell>{order.customer_name}</TableCell>
-                                    <TableCell>{order.time}</TableCell>
-                                    <TableCell>{order.type}</TableCell>
-                                    <TableCell>{order.total}</TableCell>
+                                <TableRow key={order[i].id}>
+                                    <TableCell>{order[i].customer_name}</TableCell>
+                                    <TableCell>{order[i].time}</TableCell>
+                                    <TableCell>{order[i].type}</TableCell>
+                                    <TableCell>{order[i].total}</TableCell>
                                 </TableRow>
                             );
                         })}

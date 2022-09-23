@@ -11,11 +11,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function Header() {
 
-    const totalCost  = useSelector(store=>store.totalCost)
-    return (
-        <header className='App-header'>
-            <h1 className='App-title'>Prime Pizza</h1>
-            <p>Total: ${totalCost}</p>
+    const totalCost = useSelector(store => store.totalCost)
+
     return (
         <header>
             <AppBar position="fixed" color='secondary'>
