@@ -7,6 +7,7 @@ function Checkout() {
     const dispatch = useDispatch();
     const order  = useSelector(store=>store.orderDetails[0]) //takes in fully formed data object.
     const cart = useSelector(store=>store.cart); //table maps pizzas in 'cart'.
+
     console.log (order);
     console.log(cart);
 
@@ -14,35 +15,30 @@ function Checkout() {
         history.push('/');
     }
 
-    //properly formatted order object. needs info in 'order', pizza, and TOTAL.
-
-    const orderObject = order;
-
     const makeOrderObject = () => {
-        const pizzasToOrder = [];
+        let pizzasToOrder = [];
         let totalPrice = 0;        
         cart.map(pizzaInCart=> {
             let pizza = {
                 id: pizzaInCart.id,
                 quantity: 1
             }
-            
             totalPrice += Number(pizzaInCart.price) ;
             pizzasToOrder.push(pizza);
         })
 
-        orderObject.pizzas = pizzasToOrder;
-        orderObject.total = totalPrice;
+        order.pizzas = pizzasToOrder;
+        order.total = totalPrice;
     }
 
     const postOrder = (event) => {
         event.preventDefault();
         makeOrderObject();
-        console.log(orderObject);
+        console.log(order);
         axios({
             method: 'POST',
             url: '/api/order',
-            data: orderObject
+            data: order
         }).then((response)=> {
             handleClick();
             const actionCart = { type: 'CLEAR_CART' };
@@ -58,7 +54,6 @@ function Checkout() {
 
 
 //to do: utilize MUI 'spanning table'
-//set button to LINK to "/"
     return (
         <>
             <h2>Step 3: Checkout</h2>
