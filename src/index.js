@@ -19,7 +19,7 @@ const cart = (state = [], action) => {
         return [...state, action.payload];
     }
     if (action.type === 'REMOVE_FROM_CART') {
-        let newState = state.filter(pizza=> (pizza.id !== action.payload));
+        let newState = state.filter(pizza => (pizza.id !== action.payload));
         return newState;
 
     }
@@ -30,7 +30,7 @@ const cart = (state = [], action) => {
 }
 
 
- // sets index of the artist to delete
+// sets index of the artist to delete
 
 
 // ORDER DETAILS
@@ -39,18 +39,28 @@ const orderDetails = (state = {}, action) => {
     console.log('Customer Info:', action.payload);
     if (action.type === 'CREATE_ORDER') { //need to *initialize* an order object.
         console.log(action.payload);
-        const total=action.payload;
-        return {...state, total}; 
+        const total = action.payload;
+        return { ...state, total };
     }
     // action.payload is local state TOTAL from MENU; 
     // takes info in CART and 
     if (action.type === 'ADD_CLIENT_INFO') {
         const customerInfo = action.payload;
-        return {...state, customerInfo}
-    } 
+        return { ...state, customerInfo }
+    }
 
     if (action.type === 'CLEAR_ORDER') {
         return [];
+    }
+    return state;
+}
+
+// ORDERS FOR ADMIN
+
+const adminOrders = (state = [], action) => {
+    console.log('Admin Info:', action.payload);
+    if (action.type === 'GET_ADMIN_ORDERS') {
+        return [...state]
     }
     return state;
 }
@@ -59,7 +69,8 @@ const storeInstance = createStore(
     combineReducers({
         pizzas,
         cart,
-        orderDetails
+        orderDetails,
+        adminOrders,
     }),
     applyMiddleware(logger)
 );
