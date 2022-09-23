@@ -66,15 +66,3 @@ function PizzaItem({ pizza, accrueTotal, reduceTotal }) {
 };
 
 export default PizzaItem;
-
-
-{/* <Card>
-    <CardContent>
-        <Typography>
-
-        </Typography>
-    </CardContent>
-    <CardActions>
-
-    </CardActions>
-</Card> */}

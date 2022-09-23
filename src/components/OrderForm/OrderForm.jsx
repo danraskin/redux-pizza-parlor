@@ -11,6 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 function OrderForm() {
 
@@ -58,7 +59,8 @@ function OrderForm() {
     return(
         <Card style={{maxWidth:700, margin:"0 auto", padding:"20px 5px"}}>
             <CardContent>
-                <h1>Step 2: Customer Information</h1>
+                <Typography gutterBottom variant="h5">Step 2: Customer Information</Typography>
+                <Typography gutterBottom color="textSecondary" variant="body2" component="p">Please complete form and proceed to checkout.</Typography>
                 <form onSubmit={handleSubmit} className="Customer Info">
                     <Grid container spacing={2}>
                         <Grid xs={12} item>
@@ -83,7 +85,7 @@ function OrderForm() {
                             </FormControl>
                         </Grid>
                         <Grid xs={12} sm={4} item>
-                        <Button type="submit" variant="contained" fullWidth>Next</Button>
+                        <Button type="submit" variant="contained" fullWidth>Checkout</Button>
                         </Grid>
                         <Grid xs={12} sm={4} item>
                         <Button onClick={clearForm} variant="outlined" fullWidth>Clear Form</Button>

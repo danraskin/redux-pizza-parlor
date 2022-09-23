@@ -19,7 +19,7 @@ const cart = (state = [], action) => {
         return [...state, action.payload];
     }
     if (action.type === 'REMOVE_FROM_CART') {
-        let newState = state.filter(pizza=> (pizza.id !== action.payload));
+        let newState = state.filter(pizza => (pizza.id !== action.payload));
         return newState;
 
     }
@@ -43,16 +43,24 @@ const totalCost = (state = 0, action) => {
     
 }
 
-
 // ORDER DETAILS
 const orderDetails = (state = [], action) => {
     if (action.type === 'ADD_CLIENT_INFO') {
         const customerInfo = action.payload;
         return [ customerInfo ];
     } 
-
     if (action.type === 'CLEAR_ORDER') {
         return [];
+    }
+    return state;
+}
+
+// ORDERS FOR ADMIN
+
+const adminOrders = (state = [], action) => {
+    console.log('Admin Info:', action.payload);
+    if (action.type === 'GET_ADMIN_ORDERS') {
+        return [...state]
     }
     return state;
 }
@@ -62,7 +70,8 @@ const storeInstance = createStore(
         pizzas,
         cart,
         orderDetails,
-        totalCost
+        totalCost,
+        adminOrders,
     }),
     applyMiddleware(logger)
 );
